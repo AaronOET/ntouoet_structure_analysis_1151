@@ -35,6 +35,7 @@ The notebooks end with questions for discussion.
 - [ex6_04.py](influenceline/ex6_04.py): `demo()` for Example 6.4
 - [ex6_05.py](influenceline/ex6_05.py): `demo()` for Example 6.5
 - [ex6_06.py](influenceline/ex6_06.py): `demo()` for Example 6.6
+- [cjk_font.py](influenceline/cjk_font.py): `setup_cjk_font()`, which sets up a Chinese font for matplotlib
 
 ## Running locally
 
@@ -43,5 +44,6 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-Plot labels use a Chinese font (Microsoft JhengHei or Noto Sans CJK TC). If neither is
-installed, as on Colab and Binder, the Chinese characters in the figures may not display.
+Chinese plot labels use an installed font (Microsoft JhengHei, Noto Sans CJK TC, PingFang TC or
+Heiti TC). If none is found, as on Colab and Binder, [cjk_font.py](influenceline/cjk_font.py)
+downloads Noto Sans TC (about 5.7 MB, SIL Open Font License) to `~/.cache/cjk_font/` on first use.

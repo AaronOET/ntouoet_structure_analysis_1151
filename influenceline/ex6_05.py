@@ -10,9 +10,10 @@ from matplotlib.patches import FancyArrowPatch
 import ipywidgets as widgets
 from IPython.display import display, Math
 
-# 中文字型（Windows: 微軟正黑體；其他系統自動退回）
-plt.rcParams['font.sans-serif'] = ['Microsoft JhengHei', 'Noto Sans CJK TC', 'DejaVu Sans']
-plt.rcParams['axes.unicode_minus'] = False
+from cjk_font import setup_cjk_font
+
+# 中文字型（本機用已安裝字型；Colab / Binder 會自動下載 Noto Sans TC）
+setup_cjk_font()
 
 L = 10.0                                  # 跨距 (m)
 XC0 = 5.0                                 # 課本 C 點位置 (m)
