@@ -1,11 +1,15 @@
-# Structural analysis: influence lines for statically determinate beams
+# Structural analysis: influence lines and deflections of statically determinate beams
 
-Interactive Jupyter notebooks that build the influence lines of support reactions, shear and
-bending moment for simply supported and overhanging beams. A unit load is moved along the
-beam, and each position is recorded point by point to trace the influence line, which can then
-be compared with the theoretical result from statics. The notebooks are written in Traditional Chinese.
+Interactive Jupyter notebooks for statically determinate beams, written in Traditional Chinese:
 
-## Notebooks
+- **Influence lines** ([influenceline/](influenceline/)): a unit load is moved along the beam,
+  and each position is recorded point by point to trace the influence line of a support
+  reaction, shear or bending moment, which can then be compared with the theoretical result from statics.
+- **Slope and deflection** ([deflection/](deflection/)): a concentrated load $P$ is placed
+  anywhere on a simply supported, cantilever or overhanging beam, and the elastic curve,
+  bending moment, slope $\theta(x)$ and deflection $v(x)$ update as the load moves.
+
+## Influence-line notebooks
 
 | Notebook | Example | Quantity | Beam | Colab | Binder |
 | --- | --- | --- | --- | --- | --- |
@@ -20,14 +24,36 @@ Each notebook derives the influence-line equation from equilibrium (and the meth
 for $V_C$ and $M_C$), then calls `demo()`, which gives:
 
 - a slider / text box for the unit-load position $x$,
-- a **記錄此點** (record point) button that adds $(x, 	ext{value})$ to a table and the plot,
+- a **記錄此點** (record point) button that adds $(x, \text{value})$ to a table and the plot,
 - a **顯示完整影響線** (show full influence line) checkbox to overlay the theoretical line,
 - for $V_C$, a 左側/右側 switch for the load just left or right of $C$, where the shear jumps,
 - for $M_C$, an adjustable position $a$ of point $C$ to check the peak value $ab/L$.
 
 The notebooks end with questions for discussion.
 
+## Slope and deflection notebooks
+
+| Notebook | Beam | Colab | Binder |
+| --- | --- | --- | --- |
+| [d01_deflection_simple.ipynb](deflection/d01_deflection_simple.ipynb) | Simply supported, $L = 10$ m | <a href="https://colab.research.google.com/github/AaronOET/ntouoet_structure_analysis_1151/blob/main/deflection/d01_deflection_simple.ipynb" target="_blank" rel="noopener noreferrer"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> | <a href="https://mybinder.org/v2/gh/AaronOET/ntouoet_structure_analysis_1151/main?labpath=deflection/d01_deflection_simple.ipynb" target="_blank" rel="noopener noreferrer"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a> |
+| [d02_deflection_cantilever.ipynb](deflection/d02_deflection_cantilever.ipynb) | Cantilever, fixed at $A$, $L = 6$ m | <a href="https://colab.research.google.com/github/AaronOET/ntouoet_structure_analysis_1151/blob/main/deflection/d02_deflection_cantilever.ipynb" target="_blank" rel="noopener noreferrer"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> | <a href="https://mybinder.org/v2/gh/AaronOET/ntouoet_structure_analysis_1151/main?labpath=deflection/d02_deflection_cantilever.ipynb" target="_blank" rel="noopener noreferrer"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a> |
+| [d03_deflection_overhang.ipynb](deflection/d03_deflection_overhang.ipynb) | Overhanging, $AB = 8$ m + 4 m overhang | <a href="https://colab.research.google.com/github/AaronOET/ntouoet_structure_analysis_1151/blob/main/deflection/d03_deflection_overhang.ipynb" target="_blank" rel="noopener noreferrer"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a> | <a href="https://mybinder.org/v2/gh/AaronOET/ntouoet_structure_analysis_1151/main?labpath=deflection/d03_deflection_overhang.ipynb" target="_blank" rel="noopener noreferrer"><img src="https://mybinder.org/badge_logo.svg" alt="Binder"></a> |
+
+Each notebook sets up $EI\,v'' = M(x)$ with Macaulay brackets, integrates twice and applies the
+boundary conditions, then calls `demo(kind)`, which gives:
+
+- a slider / text box for the load position $a$, and inputs for $P$ (kN) and $EI$ (kN·m²),
+- a slider / text box for an observation point $x$ that reads off $\theta$ and $v$ there,
+- four plots: the beam with reactions and the exaggerated elastic curve, $M(x)$, $\theta(x)$ and
+  $v(x)$, with the maximum deflection and the points where $\theta = 0$ marked; the axes stay fixed
+  as the load moves so positions can be compared,
+- a **顯示計算過程** (show working) checkbox that prints the reactions, the integrated equations,
+  the constants $C_1, C_2$, and a check against the textbook closed-form deflection.
+
 ## Modules
+
+- [beam_deflection.py](deflection/beam_deflection.py): `demo(kind)` for the deflection notebooks,
+  where `kind` is `'simple'`, `'cantilever'` or `'overhang'`
 
 - [ex6_01.py](influenceline/ex6_01.py): `demo()` for Example 6.1
 - [ex6_02.py](influenceline/ex6_02.py): `demo()` for Example 6.2
